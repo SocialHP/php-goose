@@ -21,7 +21,7 @@ class ImageUtils {
     public static function getImageDimensions(string $filePath): ?\stdClass {
     	try {
 	        list($width, $height, $type) = @getimagesize($filePath);
-    	} catch (Exception $e) {
+    	} catch (\Exception $e) {
     		return null;
     	}
 
