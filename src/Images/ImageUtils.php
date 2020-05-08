@@ -19,7 +19,11 @@ class ImageUtils {
      * @return object|null
      */
     public static function getImageDimensions(string $filePath): ?\stdClass {
-        list($width, $height, $type) = getimagesize($filePath);
+    	try {
+	        list($width, $height, $type) = @getimagesize($filePath);
+    	} catch (Exception $e) {
+    		return null;
+    	}
 
         if ($type === null) {
             return null;
