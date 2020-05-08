@@ -53,8 +53,9 @@ class MetaExtractor extends AbstractModule implements ModuleInterface {
         foreach ($nodes as $node) {
             $property = explode(':', $node->attr('property'));
             array_shift($property);
-            $results[implode(':', $property)] = $node->attr('content');
-        }
+            $key = implode(':', $property);
+            if (empty($results[$key])) $results[$key] = $node->attr('content');
+      }
 
         // Additionally retrieve type values based on provided og:type (http://ogp.me/#types)
         if (isset($results['type'])) {
@@ -63,8 +64,9 @@ class MetaExtractor extends AbstractModule implements ModuleInterface {
             foreach ($nodes as $node) {
                 $property = explode(':', $node->attr('property'));
                 array_shift($property);
-                $results[implode(':', $property)] = $node->attr('content');
-            }
+                $key = implode(':', $property);
+                if (empty($results[$key])) $results[$key] = $node->attr('content');
+          }
         }
 
         return $results;
