@@ -176,8 +176,9 @@ class PublishDateExtractor extends AbstractModule implements ModuleInterface {
             if (is_null($dt) && isset($og_data['pubdate'])) {
                 $dt = new \DateTime($og_data['pubdate']);
             }
-        }
-        catch (\Exception $e) {
+        } catch (\TypeError $e) {
+            // Do nothing here in case the node has unrecognizable date information.
+        } catch (\Exception $e) {
             // Do nothing here in case the node has unrecognizable date information.
         }
 
